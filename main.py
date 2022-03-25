@@ -31,7 +31,7 @@ def get_new_tab():
     opts.add_argument("pragma=no-cache")
     opts.add_argument(
         'user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36')
-    opts.add_argument("--headless")
+    opts.add_argument("--start-maximized")
     opts.add_argument("--window-size=1920,1080")
 
     service = Service(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
@@ -124,6 +124,7 @@ if __name__ == '__main__':
                 server_input.send_keys(login_details[2])
                 sleep(0.5)
                 server_input.send_keys(Keys.RETURN)
+                print(f'Login Account: {login_details[0]} logged in.')
                 datetime_now_mt4 = datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
                 image_name = f"{login_details[0]}-{datetime_now_mt4}.png"
                 sleep(10)
@@ -138,4 +139,5 @@ if __name__ == '__main__':
                     print("Sorry image couldn't upload into drive")
                 browser.close()
             except Exception as e:
-                print(traceback.print_tb(e.__traceback__))
+                print(e)
+                #print(traceback.print_tb(e.__traceback__))
