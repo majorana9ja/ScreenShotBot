@@ -28,8 +28,8 @@ def get_new_tab():
     opts.add_argument("--disable-application-cache")
     opts.add_experimental_option("windowTypes", ["webview"])
     opts.add_argument("accept-language=en-GB,en;q=0.9,en-US;q=0.8")
-    opts.add_argument("cache-control=no-cache")
-    opts.add_argument("pragma=no-cache")
+    #opts.add_argument("cache-control=no-cache")
+    #opts.add_argument("pragma=no-cache")
     opts.add_argument(
         'user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36')
     opts.add_argument("--start-maximized")
