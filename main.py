@@ -39,19 +39,32 @@ def get_new_tab():
     return web_browser
 
 
+def check_and_create_folder(drive, folderName, parentID):
+    folderlist = (drive.ListFile({'q': f"'{parentID}' in parents and trashed=false"}).GetList())
+    titlelist = [x['title'] for x in folderlist]
+    if str(folderName) in titlelist:
+        print('folder exists')
+        for item in folderlist:
+            if item['title'] == str(folderName):
+                return item['id']
+    else:
+        print('new folder created')
+        file_metadata = {
+            'title': folderName,
+            'mimeType': 'application/vnd.google-apps.folder',
+            'parents': [{"id": parentID}]
+        }
+        file0 = drive.CreateFile(file_metadata)
+        file0.Upload()
+        return file0['id']
+
+
 # Upload screenshot images into Google Drive
 def upload_into_drive(folder_name, image_filename, imageBytes):
     gauth = GoogleAuth()
     drive = GoogleDrive(gauth)
     p_folder_id = '1Rm1XX04Y0anFNoqfTtoxm3fnTBsx554a'
-    folder_metadata = {
-        'title': folder_name,
-        'parents': [{'id': p_folder_id}],
-        'mimeType': 'application/vnd.google-apps.folder'
-    }
-    folder = drive.CreateFile(folder_metadata)
-    folder.Upload()
-    f_id = folder.get('id')
+    f_id = check_and_create_folder(drive, folder_name, p_folder_id)
     gd_file = drive.CreateFile({'title': image_filename, 'parents': [{'id': f_id}]})
     tmp_name = None
     with NamedTemporaryFile(delete=False, mode='w+b') as tf:
