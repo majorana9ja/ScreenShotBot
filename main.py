@@ -20,8 +20,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 def get_new_tab():
     opts = Options()
-    opts.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     opts.add_argument('--disable-blink-features=AutomationControlled')
+    opts.binary_location = os.environ.get("GOOGLE_CHROME_BIN")    
     opts.add_argument('--disable-cached')
     opts.add_argument("--no-sandbox")
     opts.add_argument("--disable-application-cache")
@@ -128,7 +128,7 @@ if __name__ == '__main__':
                 print(f'Login Account: {login_details[0]} logged in.')
                 datetime_now_mt4 = datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
                 image_name = f"{login_details[0]}-{datetime_now_mt4}.png"
-                sleep(5)
+                sleep(12)
                 result_save = browser.get_screenshot_as_png()
                 if result_save:
                     sleep(0.5)
