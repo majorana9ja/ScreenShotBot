@@ -92,7 +92,7 @@ if __name__ == '__main__':
     ok_button_xpath = '//button[text()="OK"]'
 
     while True:
-        for login_details in account_details.values[0:10]:
+        for login_details in account_details.values:
             sleep(1)
             browser = get_new_tab()
             try:
