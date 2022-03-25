@@ -129,7 +129,7 @@ if __name__ == '__main__':
                 print(f'Login Account: {login_details[0]} logged in.')
                 datetime_now_mt4 = datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
                 image_name = f"{login_details[0]}-{datetime_now_mt4}.png"
-                sleep(12)
+                sleep(8)
                 result_save = browser.get_screenshot_as_png()
                 if result_save:
                     sleep(0.5)
