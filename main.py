@@ -126,11 +126,11 @@ if __name__ == '__main__':
                 server_input.send_keys(Keys.RETURN)
                 datetime_now_mt4 = datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
                 image_name = f"{login_details[0]}-{datetime_now_mt4}.png"
-                sleep(7)
+                sleep(10)
                 result_save = browser.get_screenshot_as_png()
                 if result_save:
-                    image = browser.get_screenshot_as_png()
                     sleep(0.5)
+                    image = browser.get_screenshot_as_png()                    
                     upload_into_drive(login_details[0], image_name, result_save)
                     print('Image Saved.')
                     print('Logging out..')
