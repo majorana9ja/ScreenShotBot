@@ -23,6 +23,7 @@ def get_new_tab():
     opts.add_argument('--disable-blink-features=AutomationControlled')
     opts.binary_location = os.environ.get("GOOGLE_CHROME_BIN")    
     opts.add_argument('--disable-cached')
+    opts.add_argument('--disable-dev-shm-usage')  
     opts.add_argument("--no-sandbox")
     opts.add_argument("--disable-application-cache")
     opts.add_experimental_option("windowTypes", ["webview"])
