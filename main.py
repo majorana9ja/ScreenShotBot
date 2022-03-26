@@ -74,7 +74,7 @@ def upload_into_drive(folder_name, image_filename, imageBytes):
         tmp_name = tf.name
         size = os.path. getsize(tmp_name)
         if tmp_name is not None:
-            if size > 100000:
+            if size > 90000:
                 gd_file.SetContentFile(tmp_name)
                 gd_file.Upload()
                 print('Image Saved.')
