@@ -72,9 +72,14 @@ def upload_into_drive(folder_name, image_filename, imageBytes):
     with NamedTemporaryFile(delete=False, mode='w+b') as tf:
         tf.write(imageBytes)
         tmp_name = tf.name
-    if tmp_name is not None:
-        gd_file.SetContentFile(tmp_name)
-        gd_file.Upload()
+        size = os.path. getsize(tmp_name)
+        if tmp_name is not None:
+            if size > 100000:
+                gd_file.SetContentFile(tmp_name)
+                gd_file.Upload()
+                print('Image Saved.')
+            else:
+                print('Not logged in')
 
 
 # program starts from here
@@ -93,7 +98,7 @@ if __name__ == '__main__':
 
     while True:
         for login_details in account_details.values:
-            sleep(1)
+            sleep(2.5)
             browser = get_new_tab()
             try:
                 browser.get(base_url)
@@ -130,27 +135,14 @@ if __name__ == '__main__':
                 print(f'Login Account: {login_details[0]} logged in.')
                 datetime_now_mt4 = datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
                 image_name = f"{login_details[0]}-{datetime_now_mt4}.png"
-                sleep(8)
+                sleep(7)
                 result_save = browser.get_screenshot_as_png()
                 if result_save:
                     sleep(0.5)
                     image = browser.get_screenshot_as_png()                    
                     upload_into_drive(login_details[0], image_name, result_save)
-                    print('Image Saved.')
                 else:
                     print("Sorry image couldn't upload into drive")
-                sleep(0.5)
-                file_btn = WebDriverWait(browser, 20).until(ec.presence_of_element_located((By.XPATH, '//*[text()="File"]')))
-                ActionChains(browser).move_to_element(file_btn).click().perform()
-                sleep(0.5)
-                logout_menu_btn = WebDriverWait(browser, 20).until(ec.presence_of_element_located((By.XPATH, '//*[text()="Logout"]')))
-                ActionChains(browser).move_to_element(logout_menu_btn).click().perform()
-                sleep(0.5)
-                logout_confirm_checkbox = WebDriverWait(browser, 20).until(ec.presence_of_element_located((By.CSS_SELECTOR, '[id="logout-confirm"]')))
-                ActionChains(browser).move_to_element(logout_confirm_checkbox).click().perform()
-                sleep(0.5)
-                logout_btn = WebDriverWait(browser, 20).until(ec.element_to_be_clickable((By.XPATH, '//button[text()="Logout"]')))
-                ActionChains(browser).move_to_element(logout_btn).click().perform()
                 print('Logging out..')
                 browser.close()
             except Exception as e:
