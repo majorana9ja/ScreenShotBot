@@ -139,7 +139,7 @@ if __name__ == '__main__':
                     print('Image Saved.')
                 else:
                     print("Sorry image couldn't upload into drive")
-                            sleep(0.5)
+                sleep(0.5)
                 file_btn = WebDriverWait(browser, 20).until(ec.presence_of_element_located((By.XPATH, '//*[text()="File"]')))
                 ActionChains(browser).move_to_element(file_btn).click().perform()
                 sleep(0.5)
