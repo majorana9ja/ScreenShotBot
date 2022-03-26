@@ -125,7 +125,8 @@ if __name__ == '__main__':
                 sleep(0.5)
                 server_input.send_keys(login_details[2])
                 sleep(0.5)
-                server_input.send_keys(Keys.RETURN)
+                login_button = WebDriverWait(browser, 20).until(ec.element_to_be_clickable((By.XPATH, ok_button_xpath)))
+                ActionChains(browser).move_to_element(login_button).click().perform()
                 print(f'Login Account: {login_details[0]} logged in.')
                 datetime_now_mt4 = datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
                 image_name = f"{login_details[0]}-{datetime_now_mt4}.png"
@@ -136,9 +137,17 @@ if __name__ == '__main__':
                     image = browser.get_screenshot_as_png()                    
                     upload_into_drive(login_details[0], image_name, result_save)
                     print('Image Saved.')
-                    print('Logging out..')
                 else:
                     print("Sorry image couldn't upload into drive")
+                sleep(0.5)
+                WebDriverWait(browser, 20).until(ec.element_to_be_clickable((By.XPATH, '//*[text()="File"]'))).click()
+                sleep(0.3)
+                WebDriverWait(browser, 20).until(ec.element_to_be_clickable((By.XPATH, '//*[text()="Logout"]'))).click()
+                sleep(0.3)
+                WebDriverWait(browser, 20).until(ec.element_to_be_clickable((By.CSS_SELECTOR, '[id="logout-confirm"]'))).click()
+                sleep(0.3)
+                WebDriverWait(browser, 20).until(ec.element_to_be_clickable((By.XPATH, '//button[text()="Logout"]'))).click()
+                print('Logging out..')
                 browser.close()
             except Exception as e:
                 print(e)
