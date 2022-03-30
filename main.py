@@ -16,10 +16,10 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.proxy import Proxy, ProxyType
 
 
 def get_new_tab():
+    PROXY = "opioahoq-rotate:0x5yz5uf50ll@p.webshare.io:80"
     opts = Options()
     opts.add_argument('--disable-blink-features=AutomationControlled')
     opts.binary_location = os.environ.get("GOOGLE_CHROME_BIN")    
@@ -36,16 +36,11 @@ def get_new_tab():
     opts.add_argument("--start-maximized")
     opts.add_argument("--headless")
     opts.add_argument("--window-size=1920,1080")
+    opts..add_argument('--proxy-server=http://%s' % PROXY)   
     
-    prox = Proxy()
-    prox.proxy_type = ProxyType.MANUAL
-    prox.https_proxy = "opioahoq-rotate:0x5yz5uf50ll@p.webshare.io:80"
-
-    capabilities = webdriver.DesiredCapabilities.CHROME
-    prox.add_to_capabilities(capabilities)
 
     service = Service(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
-    web_browser = webdriver.Chrome(service=service, options=opts, desired_capabilities=capabilities)
+    web_browser = webdriver.Chrome(service=service, options=opts)
     return web_browser
 
 
