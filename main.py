@@ -20,7 +20,7 @@ from selenium.webdriver.common.proxy import Proxy
 
 
 def get_new_tab():
-    proxy_link = "screenBot2022Username-rotate:screenBot2022Pwd@p.webshare.io:80"
+    proxy_link = "screenBot2022Username-rotate:screenBot2022Pwd@154.13.90.91:80"
     opts = Options()
     opts.add_argument('--disable-blink-features=AutomationControlled')
     opts.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
