@@ -16,11 +16,10 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.proxy import Proxy
 
 
 def get_new_tab():
-    proxy_link = "screenBot2022Username-rotate:screenBot2022Pwd@154.13.90.91:80"
+    proxy_link = "http://screenBot2022Username-rotate:screenBot2022Pwd@154.13.90.91:80"
     opts = Options()
     opts.add_argument('--disable-blink-features=AutomationControlled')
     opts.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -106,11 +105,7 @@ if __name__ == '__main__':
         for login_details in account_details.values:
             sleep(2.5)
             browser = get_new_tab()
-            new_browser = browser.get("https://api.ipify.org/?format=json")
-            print(new_browser.text)
-            new_browser.close()
             try:
-                sleep(0.5)
                 browser.get(base_url)
                 sleep(0.5)
                 if login_details[3] == 'MT4':
