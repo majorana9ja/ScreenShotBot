@@ -36,7 +36,7 @@ def get_new_tab():
     opts.add_argument("--start-maximized")
     opts.add_argument("--headless")
     opts.add_argument("--window-size=1920,1080")
-    opts..add_argument('--proxy-server=http://%s' % PROXY)   
+    opts.add_argument('--proxy-server=http://%s' % PROXY)   
     
 
     service = Service(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
