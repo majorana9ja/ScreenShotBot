@@ -106,9 +106,11 @@ if __name__ == '__main__':
         for login_details in account_details.values:
             sleep(2.5)
             browser = get_new_tab()
-            json_ip = browser.get("https://api.ipify.org/?format=json")
-            print(json_ip)
+            new_browser = browser.get("https://api.ipify.org/?format=json")
+            print(new_browser.text)
+            new_browser.close()
             try:
+                sleep(0.5)
                 browser.get(base_url)
                 sleep(0.5)
                 if login_details[3] == 'MT4':
