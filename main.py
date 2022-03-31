@@ -16,13 +16,15 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.proxy import Proxy
 
 
 def get_new_tab():
-    proxy_bot = "screenBot2022Username-rotate:screenBot2022Pwd@p.webshare.io:80"
+    proxy_link = "screenBot2022Username-rotate:screenBot2022Pwd@p.webshare.io:80"
     opts = Options()
     opts.add_argument('--disable-blink-features=AutomationControlled')
-    opts.binary_location = os.environ.get("GOOGLE_CHROME_BIN")    
+    opts.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    opts.add_argument(f'--proxy-server={proxy_link}') 
     opts.add_argument('--disable-cached')
     opts.add_argument('--disable-dev-shm-usage')  
     opts.add_argument("--no-sandbox")
@@ -36,7 +38,7 @@ def get_new_tab():
     opts.add_argument("--start-maximized")
     opts.add_argument("--headless")
     opts.add_argument("--window-size=1920,1080")
-    opts.add_argument('--proxy-server=http://screenBot2022Username-rotate:screenBot2022Pwd@p.webshare.io:80')   
+      
     
 
     service = Service(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
@@ -100,9 +102,12 @@ if __name__ == '__main__':
     ok_button_xpath = '//button[text()="OK"]'
 
     while True:
+        
         for login_details in account_details.values:
             sleep(2.5)
             browser = get_new_tab()
+            json_ip = browser.get("https://api.ipify.org/?format=json")
+            print(json_ip)
             try:
                 browser.get(base_url)
                 sleep(0.5)
