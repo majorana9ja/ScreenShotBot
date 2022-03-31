@@ -19,7 +19,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 def get_new_tab():
-    PROXY = "opioahoq-rotate:0x5yz5uf50ll@p.webshare.io:80"
+    proxy_bot = "screenBot2022Username-rotate:screenBot2022Pwd@p.webshare.io:80/"
     opts = Options()
     opts.add_argument('--disable-blink-features=AutomationControlled')
     opts.binary_location = os.environ.get("GOOGLE_CHROME_BIN")    
@@ -36,7 +36,7 @@ def get_new_tab():
     opts.add_argument("--start-maximized")
     opts.add_argument("--headless")
     opts.add_argument("--window-size=1920,1080")
-    opts.add_argument('--proxy-server=http://%s' % PROXY)   
+    opts.add_argument('--proxy-server=http://%s' % proxy_bot)   
     
 
     service = Service(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
