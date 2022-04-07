@@ -103,7 +103,11 @@ if __name__ == '__main__':
     while True:
         
         for login_details in account_details.values:
-            sleep(2.5)
+            now = datetime.now()
+            midnight = now.hour == 0 and now.minute == 0 and now.second == 0 and now.microsecond == 0
+            if midnight:
+                sleep(360)
+            sleep(1.5)
             browser = get_new_tab()
             try:
                 browser.get(base_url)
