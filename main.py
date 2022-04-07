@@ -104,8 +104,10 @@ if __name__ == '__main__':
         
         for login_details in account_details.values:
             now = datetime.now()
+            print(now)
             midnight = now.hour == 0 and now.minute == 0 and now.second == 0 and now.microsecond == 0
             if midnight:
+                print('Midnight: Sleeping for 3 minutes..')
                 sleep(360)
             sleep(1.5)
             browser = get_new_tab()
