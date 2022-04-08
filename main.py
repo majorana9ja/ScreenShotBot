@@ -104,16 +104,20 @@ if __name__ == '__main__':
         
         for login_details in account_details.values:
             sleep(0.5)
+            
+            browser = get_new_tab()
+            browser.delete_all_cookies()
+            
             now = datetime.now()
             print(now)
             midnight = now.hour == 0 or now.hour == 6 or now.hour == 12 or now.hour == 18
             if midnight:
-                if now.minute < 5
-                    print('Midnight: Sleeping for 3 minutes..')
+                if now.minute < 5:
+                    print('Midnight: Sleeping for 2 minutes..')
                     sleep(120)
+                    browser.quit()
                     break
-                    
-            browser = get_new_tab()
+            
             try:
                 browser.get(base_url)
                 browser.implicitly_wait(20)
