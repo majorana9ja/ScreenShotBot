@@ -150,11 +150,10 @@ if __name__ == '__main__':
                 login_button = WebDriverWait(browser, 20).until(ec.element_to_be_clickable((By.XPATH, ok_button_xpath)))
                 ActionChains(browser).move_to_element(login_button).click().perform()
                 print(f'Login Account: {login_details[0]} logged in.')
-                
+                sleep(6)
                 datetime_now_mt4 = datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
                 image_name = f"{login_details[0]}-{datetime_now_mt4}.png"
-                browser.implicitly_wait(35)
-                sleep(3)
+                browser.implicitly_wait(25)                
                 result_save = browser.get_screenshot_as_png()
                 if result_save:
                     sleep(0.5)
