@@ -103,50 +103,52 @@ if __name__ == '__main__':
     while True:
         
         for login_details in account_details.values:
+            sleep(0.5)
             now = datetime.now()
             print(now)
             midnight = now.hour == 0 and now.minute == 0 and now.second == 0 and now.microsecond == 0
             if midnight:
                 print('Midnight: Sleeping for 3 minutes..')
                 sleep(360)
-            sleep(1.5)
+                break
+            browser.implicitly_wait(20)
             browser = get_new_tab()
             try:
                 browser.get(base_url)
-                sleep(0.5)
+                browser.implicitly_wait(20)
                 if login_details[3] == 'MT4':
                     print('MT4')
                     platform4 = WebDriverWait(browser, 20).until(
                         ec.element_to_be_clickable((By.CSS_SELECTOR, platform_mt4_css)))
                     ActionChains(browser).move_to_element(platform4).click().perform()
                     print('MT4 clicked.')
-                    sleep(0.5)
+                    browser.implicitly_wait(10)
                 if login_details[3] == 'MT5':
                     print('MT5')
                     platform5 = WebDriverWait(browser, 20).until(
                         ec.element_to_be_clickable((By.CSS_SELECTOR, platform_mt5_css)))
                     browser.execute_script("arguments[0].click();", platform5)
-                    sleep(3.5)
+                    browser.implicitly_wait(20)
                     print('mt5 clicked.')
-                sleep(0.5)
+                browser.implicitly_wait(20)
                 WebDriverWait(browser, 20).until(ec.presence_of_element_located((By.CSS_SELECTOR, login_css))).send_keys(
                     login_details[0])
-                sleep(0.5)
+                browser.implicitly_wait(20)
                 WebDriverWait(browser, 20).until(ec.presence_of_element_located((By.CSS_SELECTOR, pass_css))).send_keys(
                     login_details[1])
-                sleep(0.5)
+                browser.implicitly_wait(20)
                 server_input = WebDriverWait(browser, 20).until(
                     ec.presence_of_element_located((By.CSS_SELECTOR, server_css)))
                 server_input.clear()
-                sleep(0.5)
+                browser.implicitly_wait(20)
                 server_input.send_keys(login_details[2])
-                sleep(0.5)
+                browser.implicitly_wait(20)
                 login_button = WebDriverWait(browser, 20).until(ec.element_to_be_clickable((By.XPATH, ok_button_xpath)))
                 ActionChains(browser).move_to_element(login_button).click().perform()
                 print(f'Login Account: {login_details[0]} logged in.')
                 datetime_now_mt4 = datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
                 image_name = f"{login_details[0]}-{datetime_now_mt4}.png"
-                sleep(7)
+                browser.implicitly_wait(25)
                 result_save = browser.get_screenshot_as_png()
                 if result_save:
                     sleep(0.5)
