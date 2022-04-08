@@ -122,14 +122,12 @@ if __name__ == '__main__':
                 browser.get(base_url)
                 browser.implicitly_wait(20)
                 if login_details[3] == 'MT4':
-                    print('MT4')
                     platform4 = WebDriverWait(browser, 20).until(
                         ec.element_to_be_clickable((By.CSS_SELECTOR, platform_mt4_css)))
                     ActionChains(browser).move_to_element(platform4).click().perform()
                     print('MT4 clicked.')
                     browser.implicitly_wait(10)
                 if login_details[3] == 'MT5':
-                    print('MT5')
                     platform5 = WebDriverWait(browser, 20).until(
                         ec.element_to_be_clickable((By.CSS_SELECTOR, platform_mt5_css)))
                     browser.execute_script("arguments[0].click();", platform5)
