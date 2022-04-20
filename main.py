@@ -78,12 +78,15 @@ def upload_into_drive(folder_name, image_filename, imageBytes):
         tmp_name = tf.name
         size = os.path. getsize(tmp_name)
         if tmp_name is not None:
-            if size > 80000:
-                gd_file.SetContentFile(tmp_name)
-                gd_file.Upload()
-                print('Image Saved.')
-            else:
-                print('Not logged in')
+            gd_file.SetContentFile(tmp_name)
+            gd_file.Upload()
+            print('Image Saved.')
+#             if size > 80000:
+#                 gd_file.SetContentFile(tmp_name)
+#                 gd_file.Upload()
+#                 print('Image Saved.')
+#             else:
+#                 print('Not logged in')
 
 
 # program starts from here
@@ -110,14 +113,7 @@ if __name__ == '__main__':
             
             now = datetime.now()
             print(now)
-            midnight = now.hour == 0 or now.hour == 6 or now.hour == 12 or now.hour == 18
-            if midnight:
-                if now.minute < 5:
-                    print('Midnight: Sleeping for 2 minutes..')
-                    sleep(120)
-                    browser.quit()
-                    break
-            
+           
             try:
                 browser.get(base_url)
                 browser.implicitly_wait(20)
@@ -132,7 +128,7 @@ if __name__ == '__main__':
                         ec.element_to_be_clickable((By.CSS_SELECTOR, platform_mt5_css)))
                     browser.execute_script("arguments[0].click();", platform5)
                     sleep(3.5)
-                    print('mt5 clicked.')
+                    print('MT5 clicked.')
 
                 browser.implicitly_wait(20)
                 WebDriverWait(browser, 20).until(ec.presence_of_element_located((By.CSS_SELECTOR, login_css))).send_keys(
@@ -151,13 +147,12 @@ if __name__ == '__main__':
                 login_button = WebDriverWait(browser, 20).until(ec.element_to_be_clickable((By.XPATH, ok_button_xpath)))
                 ActionChains(browser).move_to_element(login_button).click().perform()
                 print(f'Login Account: {login_details[0]} logged in.')
-                sleep(6)
+                sleep(7)
                 datetime_now_mt4 = datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
                 image_name = f"{login_details[0]}-{datetime_now_mt4}.png"
                 sleep(1)                
                 result_save = browser.get_screenshot_as_png()
                 if result_save:
-                    sleep(0.5)
                     image = browser.get_screenshot_as_png()                    
                     upload_into_drive(login_details[0], image_name, result_save)
                 else:
