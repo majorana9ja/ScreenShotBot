@@ -19,11 +19,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 def get_new_tab():
-    proxy_link = "http://screenBot2022Username-rotate:screenBot2022Pwd@154.13.90.91:80"
+    #proxy_link = "http://screenBot2022Username-rotate:screenBot2022Pwd@154.13.90.91:80"
+    proxy_link = "http://fixie:O9XkNmFZYn87BOp@velodrome.usefixie.com:80"
     opts = Options()
     opts.add_argument('--disable-blink-features=AutomationControlled')
     opts.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    #opts.add_argument(f'--proxy-server={proxy_link}') 
+    opts.add_argument(f'--proxy-server={proxy_link}') 
     opts.add_argument('--disable-cached')
     opts.add_argument('--disable-dev-shm-usage')  
     opts.add_argument("--no-sandbox")
